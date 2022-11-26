@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color>
+    <ion-title color slot="start">News</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-select interface="popover" placeholder="Select category">
+            <ion-select-option value="1INCH">1INCH</ion-select-option>
+            <ion-select-option value="AAVE">AAVE</ion-select-option>
+            <ion-select-option value="ADA">ADA</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item color>
+          <ion-select interface="popover" placeholder="Select source">
+            <ion-select-option value="cryptocompare">crypto compare</ion-select-option>
+            <ion-select-option value="cryptoglobe">crypto globe</ion-select-option>
+            <ion-select-option value="the block">the block</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card *ngFor="let news of allNews | async">
+    <ion-card-header>
+      <ion-card-title>{{news.title}}</ion-card-title>
+      <ion-card-subtitle> source: {{news.source}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{news.body}}
+      <br>
+      read more
+    </ion-card-content>
+    <ion-card-content>
+      <ion-card-subtitle>
+        Categories: {{news.categories}}
+      </ion-card-subtitle>
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>

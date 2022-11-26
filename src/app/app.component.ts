@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor() {}
+
+  clickHandler(): void{
+    console.log('test');
+  }
 }

@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="id; else new">Edit DCA-Trade</ion-title>
+    <ng-template #new>
+      <ion-title>New DCA-Trade</ion-title>
+    </ng-template>
+    <ion-button slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-button>
+    <ion-buttons slot="end">
+      <ion-button (click)="handleCreateAndUpdate()">
+        <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-label>Pair name</ion-label>
+      <ion-input placeholder="BTC/USDT"
+                 [(ngModel)]="pairName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Starting level</ion-label>
+      <ion-input type="number"
+                 placeholder="19500"
+                 [(ngModel)]="startingLevel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Target DCA % </ion-label>
+      <ion-input type="number"
+                 placeholder="6"
+                 [(ngModel)]="targetDCAPercentage"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Number DCA levels </ion-label>
+      <ion-input type="number"
+                 placeholder="3"
+                 [(ngModel)]="numberOfDCALevels"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Inital order size</ion-label>
+      <ion-input type="number"
+                 placeholder="10000"
+                 [(ngModel)]="initialOrderSize"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Target quantity (in %)</ion-label>
+      <ion-input type="number"
+                 placeholder="150"
+                 [(ngModel)]="targetQuantityPercentage"></ion-input>
+    </ion-item>
+
+
+  </ion-list>
+</ion-content>
