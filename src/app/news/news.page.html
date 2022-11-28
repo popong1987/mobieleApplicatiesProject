@@ -20,9 +20,7 @@
       <ion-col>
         <ion-item color>
           <ion-select interface="popover" placeholder="Select source">
-            <ion-select-option value="cryptocompare">crypto compare</ion-select-option>
-            <ion-select-option value="cryptoglobe">crypto globe</ion-select-option>
-            <ion-select-option value="the block">the block</ion-select-option>
+            <ion-select-option *ngFor="let feed of allFeeds | async |keyvalue">{{feed.key}}: {{feed.value.name}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>

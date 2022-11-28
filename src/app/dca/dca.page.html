@@ -30,7 +30,7 @@
         </ion-item-option>
       </ion-item-options>
       <ion-item>
-        <ion-card>
+        <ion-card [routerLink]="['/dca', 'dca-trade', t.id]">
           <ion-card-header>
             <ion-card-title>{{t.pairName}}</ion-card-title>
           </ion-card-header>

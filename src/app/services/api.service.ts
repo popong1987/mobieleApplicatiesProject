@@ -6,6 +6,7 @@ import {map, catchError} from 'rxjs/operators';
 import {News} from '../../datatypes/news';
 import {CryptoCompareResults} from '../../datatypes/cryptoCompareResults';
 import {environment} from '../../environments/environment';
+import {Newsfeed} from "../../datatypes/newsfeed";
 
 
 @Injectable({
@@ -62,6 +63,25 @@ export class ApiService {
         }
       ).pipe(
         map<CryptoCompareResults<News>, News[]>(c => c.Data)
+      );
+  }
+
+  getFeeds(): Observable<Newsfeed[]>{
+    return this.http
+      .get<Newsfeed>(
+        `${this.#baseURLCryptoCompare}/news/feeds`,
+        {
+          observe: 'body',
+          responseType: 'json',
+          headers: new HttpHeaders({
+            authorization: `Apikey ${this.#cryptoCompareApiKey}`
+          }),
+        }
+      ).pipe(
+        catchError(err => {
+          console.error(err);
+          return of(undefined);
+        }),
       );
   }
 }

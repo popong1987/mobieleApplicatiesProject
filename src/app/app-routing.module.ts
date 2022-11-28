@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'markets-detail',
-    loadChildren: () => import('./markets-detail/markets-detail.module').then( m => m.MarketsDetailPageModule)
+    loadChildren: () => import('./markets/markets-detail/markets-detail.module').then(m => m.MarketsDetailPageModule)
   },
 ];
 

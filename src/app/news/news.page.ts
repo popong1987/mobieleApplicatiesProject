@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../services/api.service';
 
+
 @Component({
   selector: 'app-news',
   templateUrl: './news.page.html',
@@ -9,6 +10,7 @@ import {ApiService} from '../services/api.service';
 export class NewsPage implements OnInit {
 
   allNews = this.apiService.getNews();
+  allFeeds = this.apiService.getFeeds();
   constructor(public apiService: ApiService) { }
 
   ngOnInit() {
