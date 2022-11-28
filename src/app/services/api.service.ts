@@ -25,11 +25,11 @@ export class ApiService {
     return this.http
       .get<Coin>(
         // eslint-disable-next-line max-len
-        `${this.#baseURLCoinGecko}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h`,
+        `${this.#baseURLCoinGecko}/coins/markets`,
         {
           observe: 'body',
           responseType: 'json',
-          /*params:{
+          params:{
             // eslint-disable-next-line @typescript-eslint/naming-convention
             vs_currency: 'usd',
             order: 'market_cap_desc',
@@ -39,7 +39,7 @@ export class ApiService {
             sparkline: false,
             // eslint-disable-next-line @typescript-eslint/naming-convention
             price_change_percentage: '24h'
-          }*/
+          }
         }
       ).pipe(
         catchError(err => {
