@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      DCA Levels
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"
+             [scrollEvents]="true"
+             (ionScrollStart)="logScrollStart()"
+             (ionScrollEnd)="logScrollEnd()">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">DCA Levels</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-fab *ngIf='fabIsVisible' vertical='bottom' horizontal='end' slot='fixed'>
+    <ion-fab-button [routerLink]="['/dca', 'dca-trade']">
+      <ion-icon name='add' ></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list>
+    <ion-item-sliding *ngFor="let t of dcaService.getAllDCATrades()">
+
+      <ion-item-options side='end'>
+        <ion-item-option color='danger' (click)='dcaService.deleteDCATrade(t.id)'>
+          <ion-icon slot="icon-only" name='trash'></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item>
+        <ion-card [routerLink]="['/dca', 'dca-trade', t.id]">
+          <ion-card-header>
+            <ion-card-title>{{t.pairName}}</ion-card-title>
+          </ion-card-header>
+          <ion-grid>
+            <ion-row>
+              <ion-col>order size</ion-col>
+              <ion-col>DCA level</ion-col>
+              <ion-col>price</ion-col>
+            </ion-row>
+            <ion-row *ngFor="let d of t.dCALevels">
+              <ion-col>{{t.orderSizes[d]}}</ion-col>
+              <ion-col>{{d}}</ion-col>
+              <ion-col>{{t.buyingLevels[d]}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+
+  <div class="ion-text-center" *ngIf="dcaService.getNumberOfDCATrades() === 0">
+    <h3> No trades have been added yet</h3>
+    <ion-button [routerLink]="['/dca', 'dca-trade']">Get started</ion-button>
+  </div>
+
+</ion-content>
+
