@@ -66,6 +66,7 @@ export class DcaService {
       console.error('Trying to update a nonexistent trade');
       return;
     }
+    Object.assign(trade, updatedDCATrade);
   }
 
   getNumberOfDCATrades(): number{

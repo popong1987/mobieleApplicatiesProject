@@ -23,6 +23,7 @@ export class MarketsPage{
 
   config: SwiperOptions = {
     initialSlide: 0
+
   };
 
   segments: Segment[] = Object.values(Segment);
@@ -38,7 +39,7 @@ export class MarketsPage{
   segmentChanged(): void {
     const i = this.segments.indexOf(this.selectedSegment);
     this.swiper.swiperRef.slideTo(i, 500);
-    console.log(this.allCoins);
+
   }
 
   onActiveIndexChange() {

@@ -15,7 +15,8 @@ import {Newsfeed} from "../../datatypes/newsfeed";
 export class ApiService {
 
   readonly #baseURLCoinGecko = 'https://api.coingecko.com/api/v3';
-  readonly #baseURLCryptoCompare = 'https://min-api.cryptocompare.com/data/v2';
+  readonly #baseURLCryptoCompare = 'https://min-api.cryptocompare.com/data';
+  readonly #baseURLCryptoCompareV2 = 'https://min-api.cryptocompare.com/data/v2';
   readonly #cryptoCompareApiKey = environment.cryptoCompareApiKey;
 
   constructor(private http: HttpClient) {
@@ -53,7 +54,7 @@ export class ApiService {
   getNews(): Observable<News[]> {
     return this.http
       .get<CryptoCompareResults<News>>(
-        `${this.#baseURLCryptoCompare}/news/`,
+        `${this.#baseURLCryptoCompareV2}/news/`,
         {
           observe: 'body',
           responseType: 'json',

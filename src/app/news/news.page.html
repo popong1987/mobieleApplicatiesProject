@@ -18,9 +18,9 @@
         </ion-item>
       </ion-col>
       <ion-col>
-        <ion-item color>
-          <ion-select interface="popover" placeholder="Select source">
-            <ion-select-option *ngFor="let feed of allFeeds | async | keyvalue">{{feed.key}}: {{feed.value.name}}</ion-select-option>
+        <ion-item>
+          <ion-select interface="popover" placeholder="Select source" [(ngModel)]="selectedFeed">
+            <ion-select-option *ngFor="let feed of allFeeds | async " [value]="feed.name">{{feed.name}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
