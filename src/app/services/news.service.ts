@@ -26,8 +26,11 @@ export class NewsService {
   }
 
   getFilteredNews(newsFeed: Newsfeed): Observable<News[]>{
+    if (newsFeed === undefined){
+      return this.getAllNews();
+    }
     return this.getAllNews().pipe(
-      filter(  (article: News) => article.source === newsFeed.name)
+      filter(  (news, index) => news[index].source === newsFeed.name)
     );
   }
 }

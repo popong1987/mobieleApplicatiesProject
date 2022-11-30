@@ -19,15 +19,16 @@
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-select interface="popover" placeholder="Select source" [(ngModel)]="selectedFeed">
-            <ion-select-option *ngFor="let feed of allFeeds | async " [value]="feed.name">{{feed.name}}</ion-select-option>
+          <ion-select interface="popover" placeholder="Select source" (ionChange)="changeFeed($event)" [(ngModel)]="selectedFeed">
+            <ion-select-option *ngFor="let feed of allFeeds | async " [value]="feed.key">{{feed.key}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-card *ngFor="let news of allNews | async">
+  <ion-card *ngFor="let news of newsService.getFilteredNews(this.selectedFeed) | async">
+ <!-- <ion-card *ngFor="let news of allNews | async">-->
     <ion-card-header>
       <ion-card-title>{{news.title}}</ion-card-title>
       <ion-card-subtitle> source: {{news.source}}</ion-card-subtitle>
