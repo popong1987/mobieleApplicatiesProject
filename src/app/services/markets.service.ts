@@ -7,12 +7,18 @@ import {map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class MarketsService {
-  private coinsList: Observable<Coin[]> = this.apiService.getCoins();
-  constructor(public apiService: ApiService) { }
 
-  getCoin(id: string): Observable<Coin>{
-    return this.coinsList.pipe(map(c => c.find(x => x.id === id)));
+
+export class MarketsService {
+  #coinsList = this.apiService.getCoins();
+  constructor(private apiService: ApiService) { }
+
+  getAllCoins(): Observable<Coin[]>{
+    return this.#coinsList;
+  }
+
+  getCoin(id: string): Observable<Coin[]>{
+    return this.getAllCoins().pipe(map(c => c.filter(x => x.id.toString() === id)));
 }
 }
 

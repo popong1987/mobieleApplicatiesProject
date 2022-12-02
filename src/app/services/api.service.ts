@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Coin} from '../../datatypes/coin';
-import {map, catchError} from 'rxjs/operators';
+import {map, catchError, retry} from 'rxjs/operators';
 import {News} from '../../datatypes/news';
 import {CryptoCompareResults} from '../../datatypes/cryptoCompareResults';
 import {environment} from '../../environments/environment';
-import {Newsfeed} from "../../datatypes/newsfeed";
+import {Newsfeed} from '../../datatypes/newsfeed';
+import {Category} from "../../datatypes/category";
+
 
 
 @Injectable({
@@ -24,7 +26,7 @@ export class ApiService {
 
   getCoins(): Observable<Coin[]> {
     return this.http
-      .get<Coin>(
+      .get<Coin[]>(
         // eslint-disable-next-line max-len
         `${this.#baseURLCoinGecko}/coins/markets`,
         {
@@ -43,13 +45,17 @@ export class ApiService {
           }
         }
       ).pipe(
+      /*  map<Coin, Coin[]>((c, index) => c[index] )*/
         catchError(err => {
           console.error(err);
           return of(undefined);
         }),
+        retry(3)
       );
 
   }
+
+
 
   getNews(): Observable<News[]> {
     return this.http
@@ -69,7 +75,7 @@ export class ApiService {
 
   getFeeds(): Observable<Newsfeed[]>{
     return this.http
-      .get<Newsfeed>(
+      .get<Newsfeed[]>(
         `${this.#baseURLCryptoCompare}/news/feeds`,
         {
           observe: 'body',
@@ -84,5 +90,18 @@ export class ApiService {
           return of(undefined);
         }),
       );
+  }
+
+  getCategories(): Observable<Category[]>{
+    return this.http
+      .get<Category[]>(
+        `${this.#baseURLCryptoCompare}/news/categories`,
+        {
+          observe: 'body',
+          responseType: 'json',
+          headers: new HttpHeaders({
+            authorization: `Apikey ${this.#cryptoCompareApiKey}`
+          }),
+        });
   }
 }

@@ -3,7 +3,8 @@ import {coins} from '../../../datatypes/dummyData';
 import {MarketsService} from '../../services/markets.service';
 import {Coin} from '../../../datatypes/coin';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-markets-detail',
@@ -11,20 +12,21 @@ import {Observable} from "rxjs";
   styleUrls: ['./markets-detail.page.scss'],
 })
 export class MarketsDetailPage implements OnInit {
-  coin: Coin;
+  coin: Observable<Coin[]>;
   coinId = '';
   allCoins = coins;
 
   constructor(private marketService: MarketsService, private  activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.coinId = this.activatedRoute.snapshot.paramMap.get('id');
-   /* this.coin = this.getCoin();*/
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    console.log(id);
+    this.coin = this.marketService.getCoin(id);
+    console.log(this.coin);
+
   }
 
-  private getCoin(): Observable<Coin>{
-   return this.marketService.getCoin(this.coinId);
-  }
+
 
 
 }

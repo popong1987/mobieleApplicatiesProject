@@ -5,6 +5,7 @@ import {SwiperComponent} from 'swiper/angular';
 import {coins} from '../../datatypes/dummyData';
 import {ApiService} from '../services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MarketsService} from '../services/markets.service';
 
 
 SwiperCore.use([IonicSwiper]);
@@ -34,7 +35,8 @@ export class MarketsPage{
 
   @ViewChild(SwiperComponent) swiper?: SwiperComponent;
   constructor(private actionSheetController: ActionSheetController, private ngZone: NgZone,
-              public apiService: ApiService, public route: ActivatedRoute, public router: Router) { }
+              public route: ActivatedRoute, public router: Router, public marketsService: MarketsService,
+              private apiService: ApiService) { }
 
   segmentChanged(): void {
     const i = this.segments.indexOf(this.selectedSegment);

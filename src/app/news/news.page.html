@@ -1,34 +1,37 @@
 <ion-header>
-  <ion-toolbar color>
-    <ion-title color slot="start">News</ion-title>
+  <ion-toolbar>
+    <ion-title slot="start">News</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color>
+<ion-content>
 
   <ion-grid>
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-select interface="popover" placeholder="Select category">
-            <ion-select-option value="1INCH">1INCH</ion-select-option>
-            <ion-select-option value="AAVE">AAVE</ion-select-option>
-            <ion-select-option value="ADA">ADA</ion-select-option>
+          <ion-select interface="popover" placeholder="Select category" (ionChange)="changeCategory($event)"
+                      [(ngModel)]="selectedCategory">
+            <ion-select-option value="allCategories">all</ion-select-option>
+            <ion-select-option *ngFor="let category of allCategories |async"
+                               [value]="category.categoryName">{{category.categoryName}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-select interface="popover" placeholder="Select source" (ionChange)="changeFeed($event)" [(ngModel)]="selectedFeed">
-            <ion-select-option *ngFor="let feed of allFeeds | async " [value]="feed.key">{{feed.key}}</ion-select-option>
+          <ion-select interface="popover" placeholder="Select source" (ionChange)="changeFeed($event)"
+                      [(ngModel)]="selectedFeed">
+            <ion-select-option value="all">all</ion-select-option>
+            <ion-select-option *ngFor="let feed of allFeeds | async "
+                               [value]="feed.key">{{feed.key}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-card *ngFor="let news of newsService.getFilteredNews(this.selectedFeed) | async">
- <!-- <ion-card *ngFor="let news of allNews | async">-->
+  <ion-card *ngFor="let news of filteredNews | async">
     <ion-card-header>
       <ion-card-title>{{news.title}}</ion-card-title>
       <ion-card-subtitle> source: {{news.source}}</ion-card-subtitle>
@@ -43,6 +46,10 @@
         Categories: {{news.categories}}
       </ion-card-subtitle>
     </ion-card-content>
-
   </ion-card>
+
+  <div class="ion-text-center"
+       *ngIf="(filteredNews | async)?.length <= 0">
+    <h3>No news found matching these filters</h3>
+  </div>
 </ion-content>
