@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">cryptoApp</string>
+    <string name="title_activity_main">cryptoApp</string>
+    <string name="package_name">com.dehaes.liesbeth.cryptoapp</string>
+    <string name="custom_url_scheme">com.dehaes.liesbeth.cryptoapp</string>
+</resources>

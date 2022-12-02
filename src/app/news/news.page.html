@@ -31,7 +31,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card *ngFor="let news of filteredNews | async">
+  <ion-card *ngFor="let news of filteredNews | async" >
     <ion-card-header>
       <ion-card-title>{{news.title}}</ion-card-title>
       <ion-card-subtitle> source: {{news.source}}</ion-card-subtitle>
@@ -39,7 +39,8 @@
     <ion-card-content>
       {{news.body}}
       <br>
-      read more
+      <ion-button (click)="openNews(news.url)">read more</ion-button>
+
     </ion-card-content>
     <ion-card-content>
       <ion-card-subtitle>

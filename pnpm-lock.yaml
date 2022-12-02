@@ -16,7 +16,9 @@ specifiers:
   '@angular/platform-browser': ^14.0.0
   '@angular/platform-browser-dynamic': ^14.0.0
   '@angular/router': ^14.0.0
+  '@capacitor/android': ^4.6.0
   '@capacitor/app': 4.1.0
+  '@capacitor/browser': ^4.1.0
   '@capacitor/cli': 4.4.0
   '@capacitor/core': 4.4.0
   '@capacitor/haptics': 4.0.1
@@ -57,7 +59,9 @@ dependencies:
   '@angular/platform-browser': 14.2.7_aaupshc3v455velby5cf2mmuay
   '@angular/platform-browser-dynamic': 14.2.7_q4va4uwl4uyjrhqsdbamttsfvi
   '@angular/router': 14.2.7_kpkhkxxbbfczujojuhleombtle
+  '@capacitor/android': 4.6.0_@capacitor+core@4.4.0
   '@capacitor/app': 4.1.0_@capacitor+core@4.4.0
+  '@capacitor/browser': 4.1.0_@capacitor+core@4.4.0
   '@capacitor/core': 4.4.0
   '@capacitor/haptics': 4.0.1_@capacitor+core@4.4.0
   '@capacitor/keyboard': 4.0.1_@capacitor+core@4.4.0
@@ -1768,8 +1772,24 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
+  /@capacitor/android/4.6.0_@capacitor+core@4.4.0:
+    resolution: {integrity: sha512-damKRxtkAs7GHdPwQqKyUZjjsbIyOoJWoshG2I1/Lc8cDkfGKw2WntWx3hyUPho0BmM7wnbsjeZtYbMdGm0zIQ==}
+    peerDependencies:
+      '@capacitor/core': ^4.5.0
+    dependencies:
+      '@capacitor/core': 4.4.0
+    dev: false
+
   /@capacitor/app/4.1.0_@capacitor+core@4.4.0:
     resolution: {integrity: sha512-QPZh+fnndlL1fT8jUmx8R7KPaWZDNJf/Aj1BiU867AxHnQNnM0a6wwDdQKGhA7OOniudekHEdrJAzHnPnKtLNg==}
+    peerDependencies:
+      '@capacitor/core': ^4.0.0
+    dependencies:
+      '@capacitor/core': 4.4.0
+    dev: false
+
+  /@capacitor/browser/4.1.0_@capacitor+core@4.4.0:
+    resolution: {integrity: sha512-WKAZDc9ECYQesEXlVhJu5/qbqkL5rj15wg9yBqSC0RXYsOU7aDiTMjXIu+Vu68jA8IQqIuNIp8slDvDQa+U/Kw==}
     peerDependencies:
       '@capacitor/core': ^4.0.0
     dependencies:

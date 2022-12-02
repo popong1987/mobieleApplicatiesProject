@@ -3,6 +3,7 @@ import {ApiService} from '../services/api.service';
 import {NewsService} from '../services/news.service';
 import {News} from '../../datatypes/news';
 import {Observable} from 'rxjs';
+import {Browser} from '@capacitor/browser';
 
 
 
@@ -13,7 +14,6 @@ import {Observable} from 'rxjs';
 })
 export class NewsPage implements OnInit {
 
-  allNews = this.apiService.getNews();
   allFeeds = this.apiService.getFeeds();
   allCategories = this.apiService.getCategories();
   filteredNews: Observable<News[]>;
@@ -39,6 +39,9 @@ export class NewsPage implements OnInit {
     this.filteredNews = this.newsService.getFilteredNews(this.selectedFeed, this.selectedCategory);
   }
 
+  async openNews(newsUrl: string): Promise<void>{
+    await Browser.open({ url: newsUrl });
+  }
 
 
   ngOnInit() {
