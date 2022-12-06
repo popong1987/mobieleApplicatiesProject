@@ -26,12 +26,12 @@ export class NewsPage implements OnInit {
 
 
   changeFeed($event: any): void{
-    this.selectedFeed = $event.target.value;
+    // this.selectedFeed = $event.target.value;
     this.setNews();
   }
 
   changeCategory($event: any): void{
-    this.selectedCategory = $event.target.value;
+    // this.selectedCategory = $event.target.value;
     this.setNews();
   }
 

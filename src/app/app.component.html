@@ -6,7 +6,7 @@
       <ion-content *ngIf="(authService.currentUser | async); let user">
         <ion-item>
           <ion-avatar slot="start">
-            <img [src]="user?.photoURL ?? placeholder" #avatar (error)="avatar.src = placeholder">
+            <img [src]="user?.photoURL ?? placeholder" #avatar >
           </ion-avatar>
           <ion-label>
             <ion-list-header>
