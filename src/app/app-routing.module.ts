@@ -22,6 +22,14 @@ const routes: Routes = [
     path: 'markets-detail',
     loadChildren: () => import('./markets/markets-detail/markets-detail.module').then(m => m.MarketsDetailPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+  },  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+
 ];
 
 @NgModule({

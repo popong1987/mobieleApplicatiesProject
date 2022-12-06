@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\onbes\\MobileApplicationsProject\\key.jks')
+            storePassword 'bitcoin'
+            keyAlias 'cryptoApp'
+            keyPassword 'bitcoin'
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.dehaes.liesbeth.cryptoapp"
@@ -19,7 +27,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+          signingConfig signingConfigs.debug
         }
+      debug {
+        signingConfig signingConfigs.debug
+      }
     }
 }
 
