@@ -3,7 +3,7 @@ import {coins} from '../../../datatypes/dummyData';
 import {MarketsService} from '../../services/markets.service';
 import {Coin} from '../../../datatypes/coin';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
+import {firstValueFrom, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 /*import {DatabaseService} from "../../services/database.service";
 import {Favorites} from "../../../datatypes/favorites";*/
@@ -16,13 +16,14 @@ import {Favorites} from "../../../datatypes/favorites";*/
 export class MarketsDetailPage implements OnInit {
   coin: Observable<Coin[]>;
   coinId = '';
-  allCoins = this.marketService.getAllCoins();
+  allCoins: Observable<Coin[]> = this.marketService.getAllCoins();
   favorites= this.marketService.favorites;
-  showFavorites = Observable<Coin[]>;
+  showFavorites: Observable<Coin[]>;
 
 
   constructor(private marketService: MarketsService, private  activatedRoute: ActivatedRoute,
-  /*private dbService: DatabaseService*/) { }
+  /*private dbService: DatabaseService*/) {
+  }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -33,6 +34,8 @@ export class MarketsDetailPage implements OnInit {
 
 
   toggleFavorites(id: string): void{
+    // TODO: Hier een functie in de MarketService nodig die de favorieten persistent maakt.
+
     const index = this.favorites.indexOf(id);
     if(index !== -1){
       this.favorites.splice(index, 1);
@@ -43,6 +46,9 @@ export class MarketsDetailPage implements OnInit {
       this.favorites.push(id);
       this.marketService.favorites = this.favorites;
     }
+    // TODO: Je verhuist onderstaande methode beter naar de MarketService, gekoppeld aan het persist maken van de
+    // favorieten.
+    this.setFavorites();
   }
 
 
@@ -58,12 +64,9 @@ export class MarketsDetailPage implements OnInit {
   }
 
   setFavorites(): void{
-    const result = [];
-    for (const id in this.marketService.favorites) {
-      result.push(this.allCoins.pipe(map(coin => coin.id === id)));
-    }
-    this.marketService.showFavorites = result;
+    this.marketService.showFavorites = this.allCoins
+      .pipe(
+        map<Coin[], Coin[]>(allCoins => allCoins.filter(c => this.favorites.includes(c.id)))
+      );
   }
-
-
 }

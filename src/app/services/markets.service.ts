@@ -12,7 +12,7 @@ import {map} from 'rxjs/operators';
 export class MarketsService {
   #coinsList = this.apiService.getCoins();
   favorites = [];
-  showFavorites = Observable<Coin[]>;
+  showFavorites: Observable<Coin[]>;
 
   constructor(private apiService: ApiService) { }
 
