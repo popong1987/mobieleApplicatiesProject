@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
 import {DCA} from '../../datatypes/DCA';
+import {AuthService} from './auth.service';
+import {DatabaseService} from './database.service';
+import {from, Observable, firstValueFrom} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DcaService {
   #dcaList: DCA[] = [];
-  #id = 0;
-  constructor() { }
+  dcaObservable: Observable<DCA[]> = from ([]);
+
+
+  constructor(private authService: AuthService, private dbService: DatabaseService) {
+    this.dcaObservable = dbService.retrieveDCATrades();
+  }
 
   getAllDCATrades(): DCA[]{
     return this.#dcaList;
   }
 
-  deleteDCATrade(id: number): void{
-    this.#dcaList = this.#dcaList.filter(d => d.id !== id);
+  async deleteDCATrade(id): Promise<void>{
+    await this.dbService.deleteDCATrade(id);
   }
 
-  newDCATrade(pairName: string, startingLevel: number, targetDCAPercentage: number,
+  async newDCATrade(pairName: string, startingLevel: number, targetDCAPercentage: number,
               numberOfDCALevels: number, initialOrderSize: number, targetQuantityPercentage: number ){
     const dCALevelsCalculated: number [] = [];
     const orderSizesCalculated: number  [] = [];
@@ -44,37 +51,31 @@ export class DcaService {
     }
 
 
-    this.#dcaList.push({
-      id: this.#id,
+    await this.dbService.addDCATrade(
+
       pairName,
       startingLevel,
       targetDCAPercentage,
       numberOfDCALevels,
       initialOrderSize,
       targetQuantityPercentage,
-      dCALevels: dCALevelsCalculated,
-      orderSizes: orderSizesCalculated,
-      buyingLevels: buyingLevelsCalculated
+      dCALevelsCalculated,
+      orderSizesCalculated,
+      buyingLevelsCalculated
 
-    });
-    this.#id++;
+    );
   }
 
-  updateDCATrade(updatedDCATrade: DCA): void{
-    const trade = this.#dcaList.find(t => t.id === updatedDCATrade.id);
-    if(trade === undefined){
-      console.error('Trying to update a nonexistent trade');
-      return;
-    }
-    Object.assign(trade, updatedDCATrade);
+  async updateDCATrade(id, dcaTrade: DCA): Promise<void>{
+    await this.dbService.updateDCATrade(id, dcaTrade);
   }
 
   getNumberOfDCATrades(): number{
     return this.#dcaList.length;
   }
 
-  getDCATrade(id: number): DCA | undefined{
-    return this.#dcaList.find(t => t.id === id);
+  getDCATrade(id): Promise<DCA> | undefined{
+    return firstValueFrom(this.dbService.retrieveOneTrade(id));
   }
 }
 

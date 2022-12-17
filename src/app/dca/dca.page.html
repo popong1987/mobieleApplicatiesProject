@@ -22,7 +22,7 @@
     </ion-fab-button>
   </ion-fab>
   <ion-list>
-    <ion-item-sliding *ngFor="let t of dcaService.getAllDCATrades()">
+    <ion-item-sliding *ngFor="let t of dcaService.dcaObservable|async">
 
       <ion-item-options side='end'>
         <ion-item-option color='danger' (click)='dcaService.deleteDCATrade(t.id)'>
@@ -51,7 +51,7 @@
     </ion-item-sliding>
   </ion-list>
 
-  <div class="ion-text-center" *ngIf="dcaService.getNumberOfDCATrades() === 0">
+  <div class="ion-text-center" *ngIf="(dcaService.dcaObservable | async)?.length === 0">
     <h3> No trades have been added yet</h3>
     <ion-button [routerLink]="['/dca', 'dca-trade']">Get started</ion-button>
   </div>

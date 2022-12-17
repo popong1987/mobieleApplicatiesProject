@@ -8,6 +8,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {provideFirebaseApp, initializeApp} from '@angular/fire/app';
 import {environment} from '../environments/environment';
 import {getAuth, provideAuth} from '@angular/fire/auth';
+import {enableMultiTabIndexedDbPersistence,
+  getFirestore, provideFirestore} from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +17,12 @@ import {getAuth, provideAuth} from '@angular/fire/auth';
   HttpClientModule,
     // Firebase main import.
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      // Enable offline persistence.
+      enableMultiTabIndexedDbPersistence(firestore);
+      return firestore;
+    }),
     // Firebase authentication import.
     provideAuth(() => getAuth())],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

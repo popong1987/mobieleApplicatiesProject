@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {ActivatedRoute} from '@angular/router';
 import {DcaService} from '../services/dca.service';
+import {DCA} from '../../datatypes/DCA';
+import {DatabaseService} from '../services/database.service';
+
 
 @Component({
   selector: 'app-dca-trade',
@@ -10,7 +13,7 @@ import {DcaService} from '../services/dca.service';
 })
 export class DcaTradePage implements OnInit {
 
-  id: number;
+  id: string;
   pairName: string;
   startingLevel: number;
   targetDCAPercentage: number;
@@ -22,21 +25,21 @@ export class DcaTradePage implements OnInit {
   buyingLevels: number[] = [];
 
   constructor(public navController: NavController, public activatedRoute: ActivatedRoute,
-              public dcaService: DcaService) { }
+              public dcaService: DcaService, public databaseService: DatabaseService) { }
 
   ngOnInit() {
-    this.setData();
+    this.setData().then();
   }
 
-  setData(): void{
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+   async setData(): Promise<void>{
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    if(id === null){
+    if(this.id === null){
       return;
     }
 
-    this.id = Number(id);
-    const trade = this.dcaService.getDCATrade(this.id);
+
+    const trade = await this.dcaService.getDCATrade(this.id);
     this.pairName= trade.pairName;
     this.startingLevel = trade.startingLevel;
     this.targetDCAPercentage = trade.targetDCAPercentage;
@@ -48,21 +51,23 @@ export class DcaTradePage implements OnInit {
     this.buyingLevels = trade.buyingLevels;
   }
 
-  handleCreateAndUpdate(): void{
-    if(this.id === undefined){
-      this.createTrade();
+  async handleCreateAndUpdate(): Promise<void>{
+    if(!this.id){
+      await this.createTrade();
     }else{
-      this.updateTrade();
+      await this.updateTrade(this.id);
     }
     this.navController.back();
   }
 
-  private createTrade(): void{
-    this.dcaService.newDCATrade(this.pairName, this.startingLevel, this.targetDCAPercentage, this.numberOfDCALevels,
+  async createTrade(): Promise<void>{
+    await this.dcaService.newDCATrade(this.pairName, this.startingLevel, this.targetDCAPercentage, this.numberOfDCALevels,
       this.initialOrderSize, this.targetQuantityPercentage);
   }
 
-  private updateTrade(): void{
+  async updateTrade(id): Promise<void>{
+    let dCATrade: DCA;
+
     const dCALevelsCalculated: number [] = [];
     const orderSizesCalculated: number  [] = [];
     const buyingLevelsCalculated: number[] = [];
@@ -86,8 +91,8 @@ export class DcaTradePage implements OnInit {
       buyingLevelsCalculated.push(currentDCALevel);
       prevDCALevel = currentDCALevel;
     }
-    this.dcaService.updateDCATrade({
-      id: this.id,
+
+    dCATrade={
       pairName: this.pairName,
       startingLevel: this.startingLevel,
       targetDCAPercentage: this.targetDCAPercentage,
@@ -97,6 +102,9 @@ export class DcaTradePage implements OnInit {
       dCALevels: this.dCALevels,
       orderSizes: this.orderSizes,
       buyingLevels: this.buyingLevels
-    });
+    };
+
+    await this.dcaService.updateDCATrade(id, dCATrade);
+
   }
 }

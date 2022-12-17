@@ -16,33 +16,35 @@ export class NewsService {
   #newsList = this.apiService.getNews();
   constructor(public apiService: ApiService) { }
 
-  /*private static newsMatchesNewsFilter(news: News, newsFeed: Newsfeed): boolean{
-    if(news.source === newsFeed.name){
-      return true;
-    }
-  }*/
 
   getAllNews(): Observable<News[]>{
     return this.#newsList;
   }
 
   getFilteredNews(newsFeed: string, category: string): Observable<News[]>{
-    if (newsFeed === undefined || newsFeed === 'all' && category === undefined || category === 'allCategories'){
-      return this.getAllNews();
-    }
-    if(newsFeed === undefined || newsFeed === 'all'){
-      return this.getAllNews().pipe(
-        map((article) => article.filter(n => n.categories.includes(category) === true))
-      );
-    }
-    if(category === undefined || category === 'allCategories'){
-      return this.getAllNews().pipe(
-        map((article) => article.filter(n => n.source.toString() === newsFeed))
-      );
-    }
     return this.getAllNews().pipe(
-      map((article) => article.filter(n => n.source.toString() === newsFeed && n.categories.includes(category) === true))
+      map((articles) => articles.filter((n) => this.#isValidNewsArticle(newsFeed, category, n)))
     );
+  }
+
+  #isValidNewsArticle(newsFeed: string, category: string, article: News): boolean {
+    const allNewsFeeds = newsFeed === undefined || newsFeed === 'all';
+    const allCategories = category === undefined || category === 'allCategories';
+    const hasValidNewsFeed = article.source === newsFeed;
+    const hasValidCategory = article.categories.includes(category);
+
+    if (!allNewsFeeds && allCategories) {
+      return hasValidNewsFeed;
+    }
+
+    if (!allCategories && allNewsFeeds) {
+      return hasValidCategory;
+    }
+
+    if (!allCategories && !allNewsFeeds) {
+      return hasValidNewsFeed && hasValidCategory;
+    }
+    return true;
   }
 
 

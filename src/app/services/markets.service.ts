@@ -11,6 +11,9 @@ import {map} from 'rxjs/operators';
 
 export class MarketsService {
   #coinsList = this.apiService.getCoins();
+  favorites = [];
+  showFavorites = Observable<Coin[]>;
+
   constructor(private apiService: ApiService) { }
 
   getAllCoins(): Observable<Coin[]>{
@@ -19,6 +22,14 @@ export class MarketsService {
 
   getCoin(id: string): Observable<Coin[]>{
     return this.getAllCoins().pipe(map(c => c.filter(x => x.id.toString() === id)));
+
 }
+
+  /*setFavorites(): void{
+    this.favorites = this.m
+  }*/
+
+
+
 }
 

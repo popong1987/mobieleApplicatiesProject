@@ -7,6 +7,7 @@ import {AuthService} from './services/auth.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  readonly placeholder = '/assets/Portrait_Placeholder.png';
   constructor(public authService: AuthService) {}
 
   clickHandler(): void{
