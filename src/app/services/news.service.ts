@@ -4,6 +4,7 @@ import {Newsfeed} from '../../datatypes/newsfeed';
 import {ApiService} from './api.service';
 import {Observable} from 'rxjs';
 import {filter, find, map, mapTo} from 'rxjs/operators';
+import {news} from '../../datatypes/newsDummyData';
 
 
 
@@ -25,13 +26,14 @@ export class NewsService {
     return this.getAllNews().pipe(
       map((articles) => articles.filter((n) => this.#isValidNewsArticle(newsFeed, category, n)))
     );
+
   }
 
   #isValidNewsArticle(newsFeed: string, category: string, article: News): boolean {
     const allNewsFeeds = newsFeed === undefined || newsFeed === 'all';
     const allCategories = category === undefined || category === 'allCategories';
     const hasValidNewsFeed = article.source === newsFeed;
-    const hasValidCategory = article.categories.includes(category);
+    const hasValidCategory = article.categories.includes(category)
 
     if (!allNewsFeeds && allCategories) {
       return hasValidNewsFeed;
@@ -46,6 +48,5 @@ export class NewsService {
     }
     return true;
   }
-
 
 }
