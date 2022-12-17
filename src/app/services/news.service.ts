@@ -17,11 +17,6 @@ export class NewsService {
   #newsList = this.apiService.getNews();
   constructor(public apiService: ApiService) { }
 
-  /*private static newsMatchesNewsFilter(news: News, newsFeed: Newsfeed): boolean{
-    if(news.source === newsFeed.name){
-      return true;
-    }
-  }*/
 
   getAllNews(): Observable<News[]>{
     return this.#newsList;
@@ -31,6 +26,7 @@ export class NewsService {
     return this.getAllNews().pipe(
       map((articles) => articles.filter((n) => this.#isValidNewsArticle(newsFeed, category, n)))
     );
+
   }
 
   #isValidNewsArticle(newsFeed: string, category: string, article: News): boolean {

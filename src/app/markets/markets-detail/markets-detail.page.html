@@ -13,6 +13,17 @@
       <ion-grid>
         <ion-row>
           <ion-col>
+            <ion-icon name="star-outline" *ngIf="!isInFavorites(c.id); else Favorite"
+            (click)="toggleFavorites(c.id)"></ion-icon>
+
+
+
+            <ng-template #Favorite>
+              <ion-icon name="star"
+                        (click)="toggleFavorites(c.id)"></ion-icon>
+            </ng-template>
+          </ion-col>
+          <ion-col>
             <ion-card-title>{{c.symbol}}</ion-card-title>
             <ion-card-subtitle>{{c.name}}</ion-card-subtitle>
           </ion-col>

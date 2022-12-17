@@ -1,5 +1,5 @@
 export interface DCA{
-  id: number;
+  id?: string;
   pairName: string;
   startingLevel: number;
   targetDCAPercentage: number;
@@ -12,7 +12,7 @@ export interface DCA{
 }
 
 export class DCAC{
-  id: number;
+  id?: string;
   pairName: string;
   startingLevel: number;
   targetDCAPercentage: number;

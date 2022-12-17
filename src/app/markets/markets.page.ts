@@ -6,6 +6,8 @@ import {coins} from '../../datatypes/dummyData';
 import {ApiService} from '../services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MarketsService} from '../services/markets.service';
+import {Observable} from "rxjs";
+import {Coin} from "../../datatypes/coin";
 
 
 SwiperCore.use([IonicSwiper]);
@@ -30,6 +32,8 @@ export class MarketsPage{
   segments: Segment[] = Object.values(Segment);
   selectedSegment: Segment = Segment.all;
   allCoins = this.apiService.getCoins();
+  favorites = [];
+
 
 
 
