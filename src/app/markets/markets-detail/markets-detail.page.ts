@@ -34,10 +34,10 @@ export class MarketsDetailPage implements OnInit {
 
   toggleFavorites(id: string): void{
     const index = this.favorites.indexOf(id);
-
     if(index !== -1){
       this.favorites.splice(index, 1);
       this.marketService.favorites = this.favorites;
+
     }
     else{
       this.favorites.push(id);
@@ -48,7 +48,6 @@ export class MarketsDetailPage implements OnInit {
 
   isInFavorites(id: string): boolean{
     const index = this.marketService.favorites.indexOf(id);
-    console.log(index);
 
     if(index === -1){
       return false;
@@ -59,15 +58,12 @@ export class MarketsDetailPage implements OnInit {
   }
 
   setFavorites(): void{
+    const result = [];
     for (const id in this.marketService.favorites) {
-      this.marketService.showFavorites = this.allCoins.pipe(map(coin => coin.id === id));
+      result.push(this.allCoins.pipe(map(coin => coin.id === id)));
     }
-
+    this.marketService.showFavorites = result;
   }
-
-
-
-
 
 
 }
