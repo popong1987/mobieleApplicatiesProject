@@ -50,30 +50,35 @@
     </ng-template>
 
     <ng-template swiperSlide>
-      <ion-list>
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          </ion-card-header>
+      <ion-card *ngFor="let c of marketsService.showFavorites |async; let i = index"
+                [routerLink]="['/markets', 'markets-detail', c.id]">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <img [src]="c.image"/>
+            </ion-col>
+            <ion-col>
+              <ion-card-title>{{c.symbol}}</ion-card-title>
+              <ion-card-subtitle>
+                {{c.name}}
+              </ion-card-subtitle>
+            </ion-col>
+            <ion-col size="auto">
+              {{c.current_price.toString()}}
+            </ion-col>
+          </ion-row>
+          <ion-row size="auto">
+            <ion-col offset="2">
 
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </ion-card>
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          </ion-card-header>
+            </ion-col>
+            <ion-col size="auto">
+              {{c.price_change_percentage_24h.toString()}} %
+            </ion-col>
+          </ion-row>
 
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </ion-card>
-      </ion-list>
+        </ion-grid>
+
+      </ion-card>
     </ng-template>
 
 

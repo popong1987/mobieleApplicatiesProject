@@ -20,6 +20,8 @@ specifiers:
   '@angular/platform-browser': ^14.0.0
   '@angular/platform-browser-dynamic': ^14.0.0
   '@angular/router': ^14.0.0
+  '@awesome-cordova-plugins/core': ^6.2.0
+  '@awesome-cordova-plugins/social-sharing': ^6.2.0
   '@capacitor-firebase/authentication': ^1.2.0
   '@capacitor/android': ^4.6.0
   '@capacitor/app': 4.1.0
@@ -36,6 +38,7 @@ specifiers:
   '@types/node': ^12.11.1
   '@typescript-eslint/eslint-plugin': 5.3.0
   '@typescript-eslint/parser': 5.3.0
+  cordova-plugin-x-socialsharing: ^6.0.4
   eslint: ^7.6.0
   eslint-plugin-import: 2.22.1
   eslint-plugin-jsdoc: 30.7.6
@@ -66,6 +69,8 @@ dependencies:
   '@angular/platform-browser': 14.2.7_aaupshc3v455velby5cf2mmuay
   '@angular/platform-browser-dynamic': 14.2.7_q4va4uwl4uyjrhqsdbamttsfvi
   '@angular/router': 14.2.7_ly4fm4bdvhbah77mnplcqiulwi
+  '@awesome-cordova-plugins/core': 6.2.0_rxjs@7.5.7
+  '@awesome-cordova-plugins/social-sharing': 6.2.0_h4u5bxywusrtvl4vrehndnjta4
   '@capacitor-firebase/authentication': 1.2.0_y5ycqylaemcirdlueblno5rtj4
   '@capacitor/android': 4.6.0_@capacitor+core@4.4.0
   '@capacitor/app': 4.1.0_@capacitor+core@4.4.0
@@ -75,6 +80,7 @@ dependencies:
   '@capacitor/keyboard': 4.0.1_@capacitor+core@4.4.0
   '@capacitor/status-bar': 4.0.1_@capacitor+core@4.4.0
   '@ionic/angular': 6.3.2_5hycolw5qhalpewt5wrd3hk4xi
+  cordova-plugin-x-socialsharing: 6.0.4
   firebase: 9.14.0
   ionicons: 6.0.3
   rxjs: 7.5.7
@@ -601,6 +607,26 @@ packages:
   /@assemblyscript/loader/0.10.1:
     resolution: {integrity: sha512-H71nDOOL8Y7kWRLqf6Sums+01Q5msqBW2KhDUTemh1tvY04eSkSXrK0uj/4mmY0Xr16/3zyZmsrxN7CKuRbNRg==}
     dev: true
+
+  /@awesome-cordova-plugins/core/6.2.0_rxjs@7.5.7:
+    resolution: {integrity: sha512-z5rKlTuQpLLPEIgzOmomQdoiRw5Sal2blh5CJRcjqh8ktspefbNC81Ni0MykPdV78/UlRORTHEzxugpcEcl1RQ==}
+    peerDependencies:
+      rxjs: ^5.5.0 || ^6.5.0 || ^7.3.0
+    dependencies:
+      '@types/cordova': 0.0.34
+      rxjs: 7.5.7
+    dev: false
+
+  /@awesome-cordova-plugins/social-sharing/6.2.0_h4u5bxywusrtvl4vrehndnjta4:
+    resolution: {integrity: sha512-1qza3EBYsQtzZ47TgGXQrwDeBJdr7mlz46af0sUOveOIMBNN2/aru2pi+9y9UGQSuCi/dNk8Q5KogHctyeB0pA==}
+    peerDependencies:
+      '@awesome-cordova-plugins/core': ^6.0.1
+      rxjs: ^5.5.0 || ^6.5.0 || ^7.3.0
+    dependencies:
+      '@awesome-cordova-plugins/core': 6.2.0_rxjs@7.5.7
+      '@types/cordova': 0.0.34
+      rxjs: 7.5.7
+    dev: false
 
   /@babel/code-frame/7.12.11:
     resolution: {integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==}
@@ -3113,6 +3139,10 @@ packages:
     resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
     dev: true
 
+  /@types/cordova/0.0.34:
+    resolution: {integrity: sha512-rkiiTuf/z2wTd4RxFOb+clE7PF4AEJU0hsczbUdkHHBtkUmpWQpEddynNfJYKYtZFJKbq4F+brfekt1kx85IZA==}
+    dev: false
+
   /@types/cors/2.8.12:
     resolution: {integrity: sha512-vt+kDhq/M2ayberEtJcIN/hxXy1Pk+59g2FV/ZQceeaTyCtCucjL2Q7FXlFjtWn4n15KCr1NE2lNNFhp0lEThw==}
     dev: true
@@ -4432,6 +4462,11 @@ packages:
       serialize-javascript: 6.0.0
       webpack: 5.74.0_esbuild@0.15.5
     dev: true
+
+  /cordova-plugin-x-socialsharing/6.0.4:
+    resolution: {integrity: sha512-+ak6rN9i2xf/PARA/T3Hss09s0QhpFrOWvrYowy+PkCjGWx/ZVt9RkW+7yKemfyTXSgTp0YkyAAR4r6hPAfBGQ==}
+    engines: {'0': {name: cordova, version: '>=3.0.0'}}
+    dev: false
 
   /core-js-compat/3.25.5:
     resolution: {integrity: sha512-ovcyhs2DEBUIE0MGEKHP4olCUW/XYte3Vroyxuh38rD1wAO4dHohsovUC4eAOuzFxE6b+RXvBU3UZ9o0YhUTkA==}

@@ -10,6 +10,7 @@ import {environment} from '../environments/environment';
 import {getAuth, provideAuth} from '@angular/fire/auth';
 import {enableMultiTabIndexedDbPersistence,
   getFirestore, provideFirestore} from '@angular/fire/firestore';
+import {SocialSharing} from '@awesome-cordova-plugins/social-sharing/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,9 @@ import {enableMultiTabIndexedDbPersistence,
     }),
     // Firebase authentication import.
     provideAuth(() => getAuth())],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  SocialSharing
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

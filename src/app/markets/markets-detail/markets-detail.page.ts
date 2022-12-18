@@ -41,6 +41,7 @@ export class MarketsDetailPage implements OnInit {
       this.favorites.splice(index, 1);
       this.marketService.favorites = this.favorites;
 
+
     }
     else{
       this.favorites.push(id);
@@ -48,7 +49,7 @@ export class MarketsDetailPage implements OnInit {
     }
     // TODO: Je verhuist onderstaande methode beter naar de MarketService, gekoppeld aan het persist maken van de
     // favorieten.
-    this.setFavorites();
+    this.marketService.setFavorites();
   }
 
 
@@ -63,10 +64,10 @@ export class MarketsDetailPage implements OnInit {
     }
   }
 
-  setFavorites(): void{
+  /*setFavorites(): void{
     this.marketService.showFavorites = this.allCoins
       .pipe(
         map<Coin[], Coin[]>(allCoins => allCoins.filter(c => this.favorites.includes(c.id)))
       );
-  }
+  }*/
 }

@@ -79,7 +79,8 @@ export class DatabaseService implements OnDestroy{
     await updateDoc(this.#getDocumentRef('dca', id), dcaTrade);
   }
 
-  async addFavorites(favorites: string[]): Promise<void>{
+
+  async makeFavorites(favorites: string[]): Promise<void>{
     const favorites2 = {
       favorites,
       user: this.authService.getUserUID(),
@@ -99,7 +100,11 @@ export class DatabaseService implements OnDestroy{
 
   async updateFavorites(id: string, favorites: Favorites){
     delete favorites.id;
-    await updateDoc(this.#getDocumentRef('dca', id), favorites);
+    await updateDoc(this.#getDocumentRef('favorites', id), favorites);
+  }
+
+  async deleteFavorites(id: string): Promise<void>{
+    await deleteDoc(this.#getDocumentRef('favorites', id));
   }
 
   ngOnDestroy() {

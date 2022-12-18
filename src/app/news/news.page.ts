@@ -4,6 +4,7 @@ import {NewsService} from '../services/news.service';
 import {News} from '../../datatypes/news';
 import {Observable} from 'rxjs';
 import {Browser} from '@capacitor/browser';
+import {SocialSharing} from '@awesome-cordova-plugins/social-sharing/ngx';
 
 
 
@@ -21,7 +22,8 @@ export class NewsPage implements OnInit {
   selectedCategory = this.allCategories[0];
 
 
-  constructor(public apiService: ApiService, public newsService: NewsService) { }
+  constructor(public apiService: ApiService, public newsService: NewsService,
+              private socialSharing: SocialSharing) { }
 
 
 
@@ -41,6 +43,16 @@ export class NewsPage implements OnInit {
 
   async openNews(newsUrl: string): Promise<void>{
     await Browser.open({ url: newsUrl });
+  }
+
+  shareOnTwitter(message: string,  url: string){
+    this.socialSharing.shareViaTwitter(message, null, url)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
 
