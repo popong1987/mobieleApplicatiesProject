@@ -22,7 +22,7 @@ enum Segment {
   templateUrl: './markets.page.html',
   styleUrls: ['./markets.page.scss'],
 })
-export class MarketsPage{
+export class MarketsPage {
 
   config: SwiperOptions = {
     initialSlide: 0
@@ -52,6 +52,11 @@ export class MarketsPage{
     this.ngZone.run(() => this.selectedSegment = this.segments[this.swiper.swiperRef.activeIndex]);
   }
 
-
+  /*ngOnInit(): void {
+    this.marketsService.getFavorites().then();
+    this.marketsService.setFavorites();
+    if(this.marketsService.favorites === null){
+      this.marketsService.makeFavorites(this.favorites).then();
+    }}*/
 
 }

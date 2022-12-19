@@ -15,4 +15,5 @@ ext {
     cordovaAndroidVersion = '10.1.1'
     androidxBrowserVersion = '1.4.0'
     rgcfaIncludeGoogle = true
+    rgcfaIncludeFacebook = true
 }

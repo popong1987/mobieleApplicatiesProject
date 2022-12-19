@@ -83,7 +83,7 @@ export class DatabaseService implements OnDestroy{
   async makeFavorites(favorites: string[]): Promise<void>{
     const favorites2 = {
       favorites,
-      user: this.authService.getUserUID(),
+      userId: this.authService.getUserUID(),
     };
     await addDoc<Favorites>(
       this.#getCollectionRef<any>('favorites'),
@@ -91,10 +91,10 @@ export class DatabaseService implements OnDestroy{
     );
   }
 
-  retrieveFavorites(id: string): Observable<Favorites[]>{
+  retrieveFavorites(userId: string): Observable<Favorites[]>{
     return docData<Favorites[]>(
-      this.#getDocumentRef('favorites', id),
-      {idField: 'id'}
+      this.#getDocumentRef('favorites', userId),
+      {idField: 'userId'}
     );
   }
 

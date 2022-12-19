@@ -5,3 +5,6 @@
     <string name="package_name">com.dehaes.liesbeth.cryptoapp</string>
     <string name="custom_url_scheme">com.dehaes.liesbeth.cryptoapp</string>
 </resources>
+<string name="facebook_app_id">[APP_ID]</string>
+<string name="fb_login_protocol_scheme">fb514078387346896</string>
+<string name="facebook_client_token">067ac14aa2fc52bcadde09404672da43</string>

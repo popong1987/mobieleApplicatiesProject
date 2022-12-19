@@ -2,9 +2,10 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {FirebaseAuthentication} from '@capacitor-firebase/authentication';
 import {Router} from '@angular/router';
 import {Auth, signInWithCredential, signOut, Unsubscribe} from '@angular/fire/auth';
-import {updateProfile, GoogleAuthProvider, PhoneAuthProvider, User} from 'firebase/auth';
+import {updateProfile, GoogleAuthProvider, PhoneAuthProvider, User, FacebookAuthProvider} from 'firebase/auth';
 import {Capacitor} from '@capacitor/core';
 import {BehaviorSubject} from 'rxjs';
+
 
 
 @Injectable({
@@ -73,6 +74,14 @@ export class AuthService implements OnDestroy {
     }
   }
 
+  async signInWithFacebook(): Promise<void>{
+    const {credential: {idToken}} = await FirebaseAuthentication.signInWithFacebook();
+    if(Capacitor.isNativePlatform()){
+      const credential = FacebookAuthProvider.credential(idToken);
+      await signInWithCredential(this.auth, credential);
+    }
+  }
+
   /**
    * The login process for a phone is seperated in 2 part.
    *  1. A Verification code is send to the user. <-- This method.
@@ -115,4 +124,6 @@ export class AuthService implements OnDestroy {
       await this.router.navigate(['/login']);
     }
   }
+
+
 }

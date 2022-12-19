@@ -15,9 +15,8 @@ import {Favorites} from "../../../datatypes/favorites";*/
 })
 export class MarketsDetailPage implements OnInit {
   coin: Observable<Coin[]>;
-  coinId = '';
   allCoins: Observable<Coin[]> = this.marketService.getAllCoins();
-  favorites= this.marketService.favorites;
+  favorites = this.marketService.favorites;
   showFavorites: Observable<Coin[]>;
 
 
@@ -49,7 +48,7 @@ export class MarketsDetailPage implements OnInit {
     }
     // TODO: Je verhuist onderstaande methode beter naar de MarketService, gekoppeld aan het persist maken van de
     // favorieten.
-    this.marketService.setFavorites();
+    this.setFavorites();
   }
 
 
@@ -64,10 +63,10 @@ export class MarketsDetailPage implements OnInit {
     }
   }
 
-  /*setFavorites(): void{
+  setFavorites(): void{
     this.marketService.showFavorites = this.allCoins
       .pipe(
         map<Coin[], Coin[]>(allCoins => allCoins.filter(c => this.favorites.includes(c.id)))
       );
-  }*/
+  }
 }
