@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title color="none">
       DCA Levels
     </ion-title>
   </ion-toolbar>
@@ -10,26 +10,28 @@
              [scrollEvents]="true"
              (ionScrollStart)="logScrollStart()"
              (ionScrollEnd)="logScrollEnd()">
-  <ion-header collapse="condense">
-    <ion-toolbar>
+ <!-- <ion-header collapse="condense" color="none">
+    <ion-toolbar color="none">
       <ion-title size="large">DCA Levels</ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header>-->
+
+  <div class="main-header">  </div>
 
   <ion-fab *ngIf='fabIsVisible' vertical='bottom' horizontal='end' slot='fixed'>
-    <ion-fab-button [routerLink]="['/dca', 'dca-trade']">
+    <ion-fab-button color="tertiary" [routerLink]="['/dca', 'dca-trade']">
       <ion-icon name='add' ></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-list>
-    <ion-item-sliding *ngFor="let t of dcaService.dcaObservable|async">
+  <ion-list class="popover" color="none" lines="full">
+    <ion-item-sliding *ngFor="let t of dcaService.dcaObservable|async" color="none">
 
       <ion-item-options side='end'>
         <ion-item-option color='danger' (click)='dcaService.deleteDCATrade(t.id)'>
           <ion-icon slot="icon-only" name='trash'></ion-icon>
         </ion-item-option>
       </ion-item-options>
-      <ion-item>
+      <ion-item color="none">
         <ion-card [routerLink]="['/dca', 'dca-trade', t.id]">
           <ion-card-header>
             <ion-card-title>{{t.pairName}}</ion-card-title>

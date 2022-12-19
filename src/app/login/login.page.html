@@ -4,13 +4,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-align-items-stretch">
+<ion-content [fullscreen]="true">
+
+  <ion-list class="ion-margin ion-text-center">
+    <ion-button expand="block" color="medium" (click)="authService.signInWithGoogle()">
+      <ion-icon size="medium" name="logo-google"></ion-icon>
+      <ion-label>Login with google</ion-label>
+    </ion-button>
+
+    <ion-button expand="block" color="medium" (click)="authService.signInWithFacebook()">
+      <ion-icon size="medium" name="logo-facebook"></ion-icon>
+      <ion-label>Login with facebook</ion-label>
+    </ion-button>
+  </ion-list>
+</ion-content>
+<!--<ion-content class="ion-align-items-stretch">
+
 
   <ion-grid>
     <ion-row>
       <ion-col offsetXs="0" offsetSm="3" offsetMd="4" sizeXs="12" sizeSm="6" sizeMd="4">
 
-        <!-- Add at least 1 extra provider if you want to use this in your project. -->
+        &lt;!&ndash; Add at least 1 extra provider if you want to use this in your project. &ndash;&gt;
         <ion-item class="ion-margin-vertical" color="light" (click)="authService.signInWithGoogle()">
           <div slot="start">
             <ion-icon size="large" name="logo-google"></ion-icon>
@@ -32,4 +47,4 @@
 
   </ion-grid>
 
-</ion-content>
+</ion-content>-->
