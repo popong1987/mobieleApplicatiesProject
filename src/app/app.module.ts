@@ -11,6 +11,7 @@ import {getAuth, provideAuth} from '@angular/fire/auth';
 import {enableMultiTabIndexedDbPersistence,
   getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {SocialSharing} from '@awesome-cordova-plugins/social-sharing/ngx';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,13 @@ import {SocialSharing} from '@awesome-cordova-plugins/social-sharing/ngx';
       return firestore;
     }),
     // Firebase authentication import.
-    provideAuth(() => getAuth())],
+    provideAuth(() => getAuth()),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   SocialSharing
   ],

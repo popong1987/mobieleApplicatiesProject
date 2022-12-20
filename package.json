@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "android": "ionic build --prod && pnpm exec cap sync android && pnpm exec cap open android"
+    "android": "ionic build --prod && pnpm exec cap sync android && pnpm exec cap open android",
+    "pwa-resources": "pwa-asset-generator ./resources/icon.png ./src/assets/icons -m ./src/manifest.webmanifest -i ./src/index.html"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +22,7 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@angular/service-worker": "^14.0.0",
     "@awesome-cordova-plugins/core": "^6.2.0",
     "@awesome-cordova-plugins/social-sharing": "^6.2.0",
     "@capacitor-firebase/authentication": "^1.2.0",
