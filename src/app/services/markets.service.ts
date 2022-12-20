@@ -1,7 +1,7 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable, OnDestroy, OnInit} from '@angular/core';
 import {Coin} from '../../datatypes/coin';
 import {ApiService} from './api.service';
-import {Observable, Subscription} from 'rxjs';
+import {firstValueFrom, Observable, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DatabaseService} from './database.service';
 import {Favorites} from '../../datatypes/favorites';
@@ -12,11 +12,10 @@ import {AuthService} from './auth.service';
 })
 
 
-export class MarketsService{
+export class MarketsService implements OnDestroy{
   #coinsList = this.apiService.getCoins();
   allCoins = this.apiService.getCoins();
-  /*favorites: Favorites[] = [];*/
-  favorites = [];
+  favorites: Favorites;
   showFavorites: Observable<Coin[]>;
   subscription: Subscription;
   userId = this.authService.getUserUID();
@@ -24,6 +23,7 @@ export class MarketsService{
 
   constructor(private apiService: ApiService, private dbService: DatabaseService,
               private authService: AuthService) {
+
   }
 
 
@@ -35,24 +35,40 @@ export class MarketsService{
     return this.getAllCoins().pipe(map(c => c.filter(x => x.id.toString() === id)));
   }
 
- /* async updateFavorites(id, favorites: Favorites): Promise<void>{
+  async updateFavorites(id, favorites: Favorites): Promise<void>{
     await this.dbService.updateFavorites(id, favorites);
   }
 
-  async makeFavorites(favorites: string[]){
+  async makeFavorites(favorites: Favorites){
     await this.dbService.makeFavorites(favorites);
   }
 
   async getFavorites(): Promise<void>{
-    this.subscription = this.dbService.retrieveFavorites(this.userId).subscribe(favorites => this.favorites = favorites);
+    this.subscription = this.dbService.retrieveFavorites().subscribe(favorites => {
+      if (favorites) {
+        this.favorites = favorites;
+      } else {
+        this.favorites = {
+          favorites: [],
+          userId: this.authService.getUserUID(),
+        };
+        this.makeFavorites(this.favorites);
+      }
+      console.log(this.favorites);
+      this.setFavorites();
+    });
   }
 
   setFavorites(): void{
     this.showFavorites = this.#coinsList
       .pipe(
-        map<Coin[], Coin[]>(allCoins => allCoins.filter(c => this.favorites.includes(c.id)))
+        map<Coin[], Coin[]>(allCoins => allCoins.filter(c => this.favorites.favorites.includes(c.id)))
       );
-  }*/
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 
 }

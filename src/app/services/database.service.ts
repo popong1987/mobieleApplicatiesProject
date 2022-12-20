@@ -9,12 +9,13 @@ import {
   collectionData,
   orderBy,
   where,
-  query, deleteDoc, updateDoc, docData
+  query, deleteDoc, updateDoc, docData, limit
 } from '@angular/fire/firestore';
 import {AuthService} from './auth.service';
 import {DCA, DCAC} from '../../datatypes/DCA';
 import {Observable} from 'rxjs';
-import {Favorites} from "../../datatypes/favorites";
+import {Favorites} from '../../datatypes/favorites';
+import {map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -80,22 +81,26 @@ export class DatabaseService implements OnDestroy{
   }
 
 
-  async makeFavorites(favorites: string[]): Promise<void>{
-    const favorites2 = {
-      favorites,
-      userId: this.authService.getUserUID(),
-    };
+  async makeFavorites(favorites: Favorites): Promise<void>{
     await addDoc<Favorites>(
       this.#getCollectionRef<any>('favorites'),
-      favorites2
+      favorites
     );
   }
 
-  retrieveFavorites(userId: string): Observable<Favorites[]>{
-    return docData<Favorites[]>(
-      this.#getDocumentRef('favorites', userId),
-      {idField: 'userId'}
+
+  retrieveFavorites(): Observable<Favorites>{
+    return collectionData<Favorites>(
+      query<Favorites>(
+        this.#getCollectionRef('favorites'),
+        where('userId', '==', this.authService.getUserUID()),
+        limit(1)
+      ),
+      {idField: 'id'}
+    ).pipe(
+      map(x => x[0])
     );
+
   }
 
   async updateFavorites(id: string, favorites: Favorites){
@@ -103,9 +108,6 @@ export class DatabaseService implements OnDestroy{
     await updateDoc(this.#getDocumentRef('favorites', id), favorites);
   }
 
-  async deleteFavorites(id: string): Promise<void>{
-    await deleteDoc(this.#getDocumentRef('favorites', id));
-  }
 
   ngOnDestroy() {
   }

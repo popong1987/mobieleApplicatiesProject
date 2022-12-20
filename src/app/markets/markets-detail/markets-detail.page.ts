@@ -33,27 +33,24 @@ export class MarketsDetailPage implements OnInit {
 
 
   toggleFavorites(id: string): void{
-    // TODO: Hier een functie in de MarketService nodig die de favorieten persistent maakt.
 
-    const index = this.favorites.indexOf(id);
+    const index = this.favorites.favorites.indexOf(id);
     if(index !== -1){
-      this.favorites.splice(index, 1);
+      this.favorites.favorites.splice(index, 1);
       this.marketService.favorites = this.favorites;
-
-
+      this.marketService.updateFavorites(this.favorites.id, this.favorites).then();
     }
     else{
-      this.favorites.push(id);
+      this.favorites.favorites.push(id);
       this.marketService.favorites = this.favorites;
+      this.marketService.updateFavorites(this.favorites.id, this.favorites).then();
     }
-    // TODO: Je verhuist onderstaande methode beter naar de MarketService, gekoppeld aan het persist maken van de
-    // favorieten.
-    this.setFavorites();
+
   }
 
 
   isInFavorites(id: string): boolean{
-    const index = this.marketService.favorites.indexOf(id);
+    const index = this.marketService.favorites.favorites.indexOf(id);
 
     if(index === -1){
       return false;
@@ -63,10 +60,4 @@ export class MarketsDetailPage implements OnInit {
     }
   }
 
-  setFavorites(): void{
-    this.marketService.showFavorites = this.allCoins
-      .pipe(
-        map<Coin[], Coin[]>(allCoins => allCoins.filter(c => this.favorites.includes(c.id)))
-      );
-  }
 }
