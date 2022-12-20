@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'markets-detail/:id',
-    loadChildren: () => import('./markets-detail.module').then(m => m.MarketsDetailPageModule)
+    component: MarketsDetailPage
   }
 ];
 

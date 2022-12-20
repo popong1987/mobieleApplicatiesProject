@@ -1,0 +1,39 @@
+ion-header{
+  background: transparent;
+  ion-title{
+    background: transparent;
+  }
+}
+ion-title{
+  background: transparent;
+}
+ion-toolbar{
+  background: transparent;
+}
+ion-content{
+
+  .main-header{
+    height: 45vh;
+    width: 150%;
+    background: linear-gradient(90deg, var(--ion-color-secondary) 10%, var(--ion-color-tertiary) 100%);
+    box-shadow: 0 1px 10px var(--ion-color-light);
+    border-radius: 0 0 50% 50%;
+    margin-left: -15vh;
+    margin-top: -60px;
+  }
+}
+ion-list{
+  background: transparent;
+}
+.popover{
+ background: transparent;
+  margin-top: -35vh;
+
+
+}
+
+ion-card{
+  width: 100%;
+}
+
+

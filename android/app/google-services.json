@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "466440561280",
+    "project_id": "cryptoapp-35fe6",
+    "storage_bucket": "cryptoapp-35fe6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466440561280:android:81054d32a61e75c0ca7c65",
+        "android_client_info": {
+          "package_name": "com.dehaes.liesbeth.cryptoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466440561280-0lqreu4ettkj0u04ncfdtttp3in393lh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dehaes.liesbeth.cryptoapp",
+            "certificate_hash": "701ddc66991dcc3d1ff15ce262844a411ef24db8"
+          }
+        },
+        {
+          "client_id": "466440561280-pg21h05eiru5l9skfh360gelsuuh38hi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCoqRm8Wi4WDOTcoDP0VRbp9JYbu4CDv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466440561280-pg21h05eiru5l9skfh360gelsuuh38hi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
