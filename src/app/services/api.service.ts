@@ -7,7 +7,7 @@ import {News} from '../../datatypes/news';
 import {CryptoCompareResults} from '../../datatypes/cryptoCompareResults';
 import {environment} from '../../environments/environment';
 import {Newsfeed} from '../../datatypes/newsfeed';
-import {Category} from "../../datatypes/category";
+import {Category} from '../../datatypes/category';
 
 
 

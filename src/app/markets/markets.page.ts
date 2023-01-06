@@ -2,12 +2,10 @@ import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import SwiperCore, {SwiperOptions} from 'swiper';
 import {ActionSheetController, IonicSwiper} from '@ionic/angular';
 import {SwiperComponent} from 'swiper/angular';
-import {coins} from '../../datatypes/dummyData';
 import {ApiService} from '../services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MarketsService} from '../services/markets.service';
-import {Observable} from "rxjs";
-import {Coin} from "../../datatypes/coin";
+
 
 
 SwiperCore.use([IonicSwiper]);
@@ -54,6 +52,6 @@ export class MarketsPage implements OnInit{
 
   ngOnInit(): void {
     this.marketsService.getFavorites().then();
-    }
+  }
 
 }

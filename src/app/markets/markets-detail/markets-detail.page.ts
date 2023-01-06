@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {coins} from '../../../datatypes/dummyData';
 import {MarketsService} from '../../services/markets.service';
 import {Coin} from '../../../datatypes/coin';
 import {ActivatedRoute} from '@angular/router';
-import {firstValueFrom, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-/*import {DatabaseService} from "../../services/database.service";
-import {Favorites} from "../../../datatypes/favorites";*/
+import {Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-markets-detail',
@@ -20,8 +17,7 @@ export class MarketsDetailPage implements OnInit {
   showFavorites: Observable<Coin[]>;
 
 
-  constructor(private marketService: MarketsService, private  activatedRoute: ActivatedRoute,
-  /*private dbService: DatabaseService*/) {
+  constructor(private marketService: MarketsService, private  activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {

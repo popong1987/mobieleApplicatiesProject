@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {News} from '../../datatypes/news';
-import {Newsfeed} from '../../datatypes/newsfeed';
 import {ApiService} from './api.service';
 import {Observable} from 'rxjs';
-import {filter, find, map, mapTo} from 'rxjs/operators';
-import {news} from '../../datatypes/newsDummyData';
+import {map} from 'rxjs/operators';
+
 
 
 
@@ -33,7 +32,7 @@ export class NewsService {
     const allNewsFeeds = newsFeed === undefined || newsFeed === 'all';
     const allCategories = category === undefined || category === 'allCategories';
     const hasValidNewsFeed = article.source === newsFeed;
-    const hasValidCategory = article.categories.includes(category)
+    const hasValidCategory = article.categories.includes(category);
 
     if (!allNewsFeeds && allCategories) {
       return hasValidNewsFeed;

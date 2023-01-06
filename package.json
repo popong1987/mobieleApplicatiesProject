@@ -11,6 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "android": "ionic build --prod && pnpm exec cap sync android && pnpm exec cap open android",
+    "android-resources": "capacitor-assets generate --iconBackgroundColor #eeeeee --iconBackgroundColorDark #222222 --splashBackgroundColor #eeeeee --splashBackgroundColorDark #111111 --logoSplashScale 0.5  --android",
     "pwa-resources": "pwa-asset-generator ./resources/icon.png ./src/assets/icons -m ./src/manifest.webmanifest -i ./src/index.html"
   },
   "private": true,
@@ -32,6 +33,7 @@
     "@capacitor/core": "4.4.0",
     "@capacitor/haptics": "4.0.1",
     "@capacitor/keyboard": "4.0.1",
+    "@capacitor/network": "^4.1.0",
     "@capacitor/status-bar": "4.0.1",
     "@ionic/angular": "^6.1.9",
     "cordova-plugin-x-socialsharing": "^6.0.4",

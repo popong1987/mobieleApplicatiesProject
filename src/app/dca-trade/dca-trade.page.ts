@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {ActivatedRoute} from '@angular/router';
 import {DcaService} from '../services/dca.service';
-import {DCA} from '../../datatypes/DCA';
 import {DatabaseService} from '../services/database.service';
 
 
@@ -66,45 +65,8 @@ export class DcaTradePage implements OnInit {
   }
 
   async updateTrade(id): Promise<void>{
-    let dCATrade: DCA;
-
-    const dCALevelsCalculated: number [] = [];
-    const orderSizesCalculated: number  [] = [];
-    const buyingLevelsCalculated: number[] = [];
-    let prevOrderSize: number = this.initialOrderSize;
-    let currentOrderSize: number;
-    let prevDCALevel: number = this.startingLevel;
-    let currentDCALevel: number;
-
-    for (let i = 0; i < this.numberOfDCALevels; i++) {
-      dCALevelsCalculated.push(i);
-    }
-
-    for (let i = 0; i < this.numberOfDCALevels; i++) {
-      currentOrderSize = prevOrderSize*(this.targetQuantityPercentage/100);
-      orderSizesCalculated.push(currentOrderSize);
-      prevOrderSize = currentOrderSize;
-    }
-
-    for (let i = 0; i < this.numberOfDCALevels; i++) {
-      currentDCALevel = prevDCALevel*(this.targetQuantityPercentage/100);
-      buyingLevelsCalculated.push(currentDCALevel);
-      prevDCALevel = currentDCALevel;
-    }
-
-    dCATrade={
-      pairName: this.pairName,
-      startingLevel: this.startingLevel,
-      targetDCAPercentage: this.targetDCAPercentage,
-      numberOfDCALevels: this.numberOfDCALevels,
-      initialOrderSize: this.initialOrderSize,
-      targetQuantityPercentage: this.targetQuantityPercentage,
-      dCALevels: this.dCALevels,
-      orderSizes: this.orderSizes,
-      buyingLevels: this.buyingLevels
-    };
-
-    await this.dcaService.updateDCATrade(id, dCATrade);
-
+    await this.dcaService.updateDCATrade(this.id, this.pairName, this.startingLevel, this.targetDCAPercentage, this.numberOfDCALevels,
+      this.initialOrderSize, this.targetQuantityPercentage)
   }
+
 }

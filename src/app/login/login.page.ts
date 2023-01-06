@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import {Capacitor} from '@capacitor/core';
 import {AuthService} from '../services/auth.service';
-import {ModalController} from '@ionic/angular';
+
 
 @Component({
   selector: 'app-login',
@@ -12,7 +11,7 @@ import {ModalController} from '@ionic/angular';
 export class LoginPage implements OnInit {
   isNative = Capacitor.isNativePlatform();
 
-  constructor(public authService: AuthService, private modalController: ModalController) { }
+  constructor(public authService: AuthService) { }
 
 
 

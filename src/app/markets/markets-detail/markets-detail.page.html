@@ -16,8 +16,6 @@
             <ion-icon name="star-outline" *ngIf="!isInFavorites(c.id); else Favorite"
             (click)="toggleFavorites(c.id)"></ion-icon>
 
-
-
             <ng-template #Favorite>
               <ion-icon name="star"
                         (click)="toggleFavorites(c.id)"></ion-icon>
