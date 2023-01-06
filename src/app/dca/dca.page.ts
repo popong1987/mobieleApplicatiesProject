@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {DcaService} from '../services/dca.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {DatabaseService} from '../services/database.service';
 

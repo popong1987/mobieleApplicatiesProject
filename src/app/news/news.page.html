@@ -4,9 +4,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="status">
 
-  <ion-grid>
+  <ion-grid >
     <ion-row>
       <ion-col>
         <ion-item>
@@ -51,7 +51,33 @@
   </ion-card>
 
   <div class="ion-text-center"
-       *ngIf="(filteredNews | async)?.length <= 0">
+       *ngIf="status && (filteredNews | async)?.length <= 0">
     <h3>No news found matching these filters</h3>
   </div>
+
+
+</ion-content>
+
+<ion-content *ngIf="!status">
+<ion-grid>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col></ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col>
+      you are
+      <ion-text color="danger">offline</ion-text>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col size="auto">Please check your connection and try again</ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-grid>
+
 </ion-content>
